@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Computer Exercise 4</title>
+        <meta name="description" content="Computer Excercise.">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+
+<h4><a name="h.fcvwwvadkqh"></a><b>BB2490/DD2399, Analysis of data from high-throughput molecular biology experiments</b></h4>
+
+<h2 align="center" ><a name="h.nwfx9ak22igk"></a>Lab instructions, Computer exercise 4</h2>
+
+<h2 align="center" ><a name="h.v5u8ojwmv8e"></a>Peptide and protein identification</h2>
+
+<h3><a name="h.uh1m2p22phi4"></a>Introduction</h3>
+
+<p>This computer exercise involves searching for matching peptides to MS/MS spectra of shotgun proteomics experiment, as well as the subsequent inference of proteins from these peptides. We will do the search using a freely available search engine called <a href="ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/CURRENT/omssa-linux.tar.gz">OMSSA</a>, on an example dataset from a yeast lysate. To pass the lab you will have to submit one short report (in .odt, .doc, .docx, .pdf or .rtf format) per group, with answers to the questions, to any of the Teaching Assistants. The deadline is set to one week. Please work in pairs, as long as possible, and follow the instructions below:</p>
+
+<h3><a name="h.8b0j30iju0nq"></a>The data</h3>
+
+<p>Here, we will use MS/MS spectra derived from a yeast lysate. Download the MS/MS spectra file here: <a href="yeast_spectra.mgf">yeast_spectra.mgf</a>, and put it in a convenient working directory.</p>
+
+<p>A yeast protein database in the FASTA-format can be downloaded from here: <a href="database.zip">database.zip</a>, and is most conveniently placed in the same working directory. Unzip it to be able to use the uniprot_sprot_yeast09_02.fasta-file kept inside, for example by running the following command from your working directory: <code>unzip database.zip</code></p>
+
+<h3><a name="h.6jmvoa2kfb66"></a>The programs</h3>
+
+<p>We need two programs to carry out the peptide search. First a <i>Search Graphical User Interface</i> (SearchGUI), to be able to start the search within a graphical setting. And second, the search engine (OMSSA) itself. In addition, we'll use a two additional programs to look at the results (OMSSA-parser) and to infer proteins from the peptides (MassSieve), we'll download these further on in the lab.</p>
+
+<p>Download the SearchGUI from <a href="http://code.google.com/p/searchgui/">http://code.google.com/p/searchgui/</a>. The version SearchGUI-1.11.0_mac_and_linux.zip seem to work well on ubuntu 12.04, on earlier ubuntu, 1.3.2 worked well.</p>
+
+<p><i>Unzip:</i> Place the zip-file in your designated working directory and unzip it with the command: <code>unzip SearchGUI-1.3.2.zip</code></p>
+
+<p>Download OMSSA from ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/CURRENT/ and extract OMSSA in your working directory.</p>
+
+<h3><a name="h.b8bsl2avlr0g"></a>Task</h3>
+
+<p>The task is to run OMSSA using the SearchGUI to identify peptides from the MS/MS spectra. Subsequently, we will identify proteins from these peptides.</p>
+
+<p>1. <b><i>Get SearchGUI and OMSSA working</i></b></p>
+
+<p>Download and extract the SearchGUI and OMSSA as described above:</p>
+
+<p>Under linux, a few permissions may have to be edited in order to make the SearchGUI to work. change the permissions of omssacl in your OMSSA-directory, and makeblastdb in the SearchGUI-1.3.2/makeblastdb/linux/ directory to give all users execution rights. For example by running these commands in your working directory:</p>
+
+<blockquote>
+    <code>
+        chmod 777 omssa-2.1.9.linux/omssacl<br/>
+        chmod 777 SearchGUI-1.11.0_mac_and_linux/resources/makeblastdb/linux/makeblastdb<br/>
+    </code>
+</blockquote>
+
+<p>From the SearchGUI's directory, open the SearchGUI, for example with the following commands:</p>
+
+<blockquote>
+    <code>
+cd SearchGUI-1.11.0_mac_and_linux/<br/>
+java -jar SearchGUI-1.11.0.jar<br/>
+    </code>
+</blockquote>
+
+<p>2. <b><i>Define the required settings of the search</i></b></p>
+
+<p>If opening the SearchGUI worked properly, you should now be able to search for matching peptides. But we will first have to specify the parameters of our search.</p>
+
+<p>Under Edit &gt; Search Engines, change the path of OMSSA Location to your unzipped OMSSA directory. Also switch X!Tandem Location to "Disabled". X!Tandem is another search engine which we didn't download here.</p>
+
+<p>Under "Input &amp; Output", select the yeast_spectra.mgf file as the "Spectrum File", and an appropriate "Output Folder".</p>
+
+<p>3. <b><i>Configure the parameters to adjust the search for our particular experiment</i></b></p>
+
+<p>Open Edit &gt; Search Settings</p>
+
+<p>For Database, select the uniprot_sprot_yeast09_02.fasta file, if it promts you for Decoys, select "No".</p>
+
+<p>Fixed modifications: 'Carbamidomethyl C'</p>
+
+<p>Variable modifications: 'Oxidation of M' and 'acetylation of protein n-term'.</p>
+
+<p>Our shotgun proteomics experiment was carried out on yeast proteins digested with trypsin, choose Trypsin as the proteolytic enzyme (protease), with 1 as Max Missed Cleavages.<b>QUESTION 1</b>: why not 0?.</p>
+
+<p>Set the mass tolerance to 0.2 Da (note the unit) in both cases. <b>QUESTION 2</b>: How come we can specify two different mass tolerances?.</p>
+
+<p>We'll leave the ion types and precursor charge bounds as they are.</p>
+
+<p>4. <b><i>Run the peptide search</i></b></p>
+
+<p>Click on "Start the Search" Run. The search will go in a couple of seconds.</p>
+
+<p>Look in your designated output folder, if everything worked properly, it should contain a couple of files including yeast_spectra.omx, mods.xml, usermods.xml. The OMX-file contains the peptides matches, and the other two files the OMSSA modifications and the user modifications file. We will look closer at these files, and try to infer what proteins they represent in the next step.</p>
+
+<p>5. <b><i>Watch the peptide search results</i></b></p>
+
+<p>The peptide search is now completely finished and three files have been created in your output directory: First, an OMSSA XML-file (.omx) listing all the peptide matches, and second, two files (mods.xml and usermod.xml) with OMSSA's and our own modification settings, respectively.</p>
+
+<p>To look at the results we use the OMSSA-parser. Download omssa-parser-1.5.8.zip from <a href="http://code.google.com/p/omssa-parser/">http://code.google.com/p/omssa-parser/</a> and unzip it in your working directory. (Command:<code>unzip omssa-parser-1.5.8.zip</code>).</p>
+
+<p>Open the parser from its' extracted directory, using the command <code>java -jar omssa-parser-1.5.8.jar</code></p>
+
+<p>You will be asked for your peptide search results file and the two modification files, fill in these fields.</p>
+
+<p>Now, you'll see a list of all fragmentation spectra, some of which have been matched to one or many peptides in the database fasta-file. Click on a spectrum to see it, and its' matched peptides. Click around a little bit to get a feeling of it.</p>
+
+<p><b>QUESTION 3</b>: For each spectrum, how are the peptide matches ranked originally? (Assuming you have not resorted them...)</p>
+
+<p><b>QUESTION 4</b>: What do the unidentified spectra seem to have in common?</p>
+
+<p>6. <b><i>Protein identification</i></b></p>
+
+<p>After searching for peptides, download the "Latest Stable Binary" of MassSieve from <a href="http://www.ncbi.nlm.nih.gov/staff/slottad/MassSieve/">http://www.ncbi.nlm.nih.gov/staff/slottad/MassSieve/</a>. Unzip in the same manner as before, in your working directory.</p>
+
+<p>Open MassSieve from the extracted MassSieve1.12 directory with the following command:</p>
+
+<p><code>java -jar MassSieve.jar</code></p>
+
+<p>A new window will open, with only a few menus available at the top, to process the peptide identifications results from OMSSA, start a new "experiment" with "File &gt; New Experiment".</p>
+
+<p>The next step is to add our data, to do this, choose "File &gt; Add Search Results". This step infers proteins thought to be in our yeast sample from the peptide identifications.</p>
+
+<p>The right side of the screen shows the proteins matches, clicking on a protein row can show a "Cluster Graph" of the manner in which the protein is identified. Some proteins are identified by many peptides, some by just a single peptide match.</p>
+
+<p>Scrolling down to see the rest of the protein identifications will reveal some of the problems with protein inference, indicated by the word in the "Parsimony Type" column. Look at the "Cluster Graph" of a few proteins, with different "Parsimony Types".</p>
+
+<p><b>QUESTION 5</b>: What seems to be the difference between the proteins identified with different parsimony types?</p>
+
+<p><b>QUESTION 6</b>: Can you find what important information about the protein matches that is missing in this program?</p>
+
+<p>7. </p>
+
+<h3><a name="h.x7h6n5v2kvrl"></a>Answers</h3>
+
+<p>Should be e-mailed to the Teaching Assistants</p>
+
+<h3><a name="h.tp3olob5cn20"></a>Previous errors, and solutions</h3>
+
+<p>1. 08:25 Feb 9, 2011:</p>
+
+<p>There might be some problems with limited space on your login accounts (the lab requires ~200 MB). A first attempt to solve this could be by working in the /tmp folder, which is the temporary folder on your computer (<code>cd /tmp</code>).</p>
+
+<p>A second attempt to solve this could be by working on a plugged-in USB-stick.</p>
+
+<p>2. 08:58 Feb 9, 2011:</p>
+
+<p>To avoid problems when downloading extracted-files to the USB-stick, choose OPEN instead of SAVE after clicking on the link. Then extract the files directly to your USB-stick.</p>
+
+<p>3. 09:45 Feb 9, 2011:</p>
+
+<p>An error message during the OMSSA peptide search might be due to a truncated yeast_spectra.mgf-file, compare the end of the file on your computer with the file you copied from this website. Replace it if you see any differences.</p>
+        
+        
+    </body>
+</html>
