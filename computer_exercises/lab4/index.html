@@ -30,9 +30,9 @@
 
 <p>We need two programs to carry out the peptide search. First a <i>Search Graphical User Interface</i> (SearchGUI), to be able to start the search within a graphical setting. And second, the search engine (OMSSA) itself. In addition, we'll use a two additional programs to look at the results (OMSSA-parser) and to infer proteins from the peptides (MassSieve), we'll download these further on in the lab.</p>
 
-<p>Download the SearchGUI from <a href="http://code.google.com/p/searchgui/">http://code.google.com/p/searchgui/</a>. The version SearchGUI-1.11.0_mac_and_linux.zip seem to work well on ubuntu 12.04, on earlier ubuntu, 1.3.2 worked well.</p>
+<p>Download the SearchGUI from <a href="http://compomics.github.io/projects/searchgui.html">http://compomics.github.io/projects/searchgui.html</a>.</p>
 
-<p><i>Unzip:</i> Place the zip-file in your designated working directory and unzip it with the command: <code>unzip SearchGUI-1.3.2.zip</code></p>
+<p><i>Unzip:</i> Place the archive in your designated working directory and unzip it with the command: <code>tar -xvzf SearchGUI-2.6.4-mac_and_linux.tar.gz</code></p>
 
 <p>Download OMSSA from ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/CURRENT/ and extract OMSSA in your working directory.</p>
 
@@ -44,12 +44,12 @@
 
 <p>Download and extract the SearchGUI and OMSSA as described above:</p>
 
-<p>Under linux, a few permissions may have to be edited in order to make the SearchGUI to work. change the permissions of omssacl in your OMSSA-directory, and makeblastdb in the SearchGUI-1.3.2/makeblastdb/linux/ directory to give all users execution rights. For example by running these commands in your working directory:</p>
+<p>Under linux, a few permissions may have to be edited in order to make the SearchGUI to work. change the permissions of omssacl in your OMSSA-directory, and makeblastdb in the SearchGUI-2.6.3/resources/makeblastdb/linux/linux_64bit directory to give all users execution rights. For example by running these commands in your working directory:</p>
 
 <blockquote>
     <code>
         chmod 777 omssa-2.1.9.linux/omssacl<br/>
-        chmod 777 SearchGUI-1.11.0_mac_and_linux/resources/makeblastdb/linux/makeblastdb<br/>
+        <nobr>chmod 777 SearchGUI-2.6.4/resources/makeblastdb/linux/linux_64bit/makeblastdb</nobr><br/>
     </code>
 </blockquote>
 
@@ -57,10 +57,12 @@
 
 <blockquote>
     <code>
-cd SearchGUI-1.11.0_mac_and_linux/<br/>
-java -jar SearchGUI-1.11.0.jar<br/>
+cd SearchGUI-2.6.4/<br/>
+java -jar SearchGUI-2.6.4.jar<br/>
     </code>
 </blockquote>
+
+<p>If you get an error message mentioning that MS Amanda was not properly installed, you can safely ignore it and also press Cancel on the "Search Engine Settings" dialogue showing up next.</p>
 
 <p>2. <b><i>Define the required settings of the search</i></b></p>
 
@@ -72,11 +74,11 @@ java -jar SearchGUI-1.11.0.jar<br/>
 
 <p>3. <b><i>Configure the parameters to adjust the search for our particular experiment</i></b></p>
 
-<p>Open Edit &gt; Search Settings</p>
+<p>Right below the spectrum file input field, there is a field for search settings. Click add to create a new settings option. Choose any name you prefer and click "Spectrum Matching" to enter the menu for editing the search settings.</p>
 
 <p>For Database, select the uniprot_sprot_yeast09_02.fasta file, if it promts you for Decoys, select "No".</p>
 
-<p>Fixed modifications: 'Carbamidomethyl C'</p>
+<p>Fixed modifications: 'Carbamidomethylation of C'</p>
 
 <p>Variable modifications: 'Oxidation of M' and 'acetylation of protein n-term'.</p>
 
@@ -84,11 +86,11 @@ java -jar SearchGUI-1.11.0.jar<br/>
 
 <p>Set the mass tolerance to 0.2 Da (note the unit) in both cases. <b>QUESTION 2</b>: How come we can specify two different mass tolerances?.</p>
 
-<p>We'll leave the ion types and precursor charge bounds as they are.</p>
+<p>We'll leave the ion types and precursor charge bounds as they are. Press ok and save these settings.</p>
 
 <p>4. <b><i>Run the peptide search</i></b></p>
 
-<p>Click on "Start the Search" Run. The search will go in a couple of seconds.</p>
+<p>Add a suitable Output Folder and then click on "Start the Search!" button. The search will go in a couple of seconds.</p>
 
 <p>Look in your designated output folder, if everything worked properly, it should contain a couple of files including yeast_spectra.omx, mods.xml, usermods.xml. The OMX-file contains the peptides matches, and the other two files the OMSSA modifications and the user modifications file. We will look closer at these files, and try to infer what proteins they represent in the next step.</p>
 
