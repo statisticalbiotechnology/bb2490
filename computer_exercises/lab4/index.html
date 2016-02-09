@@ -18,7 +18,7 @@
 
 <h3><a name="h.uh1m2p22phi4"></a>Introduction</h3>
 
-<p>This computer exercise involves searching for matching peptides to MS/MS spectra of shotgun proteomics experiment, as well as the subsequent inference of proteins from these peptides. We will do the search using a freely available search engine called <a href="ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/CURRENT/omssa-linux.tar.gz">OMSSA</a>, on an example dataset from a yeast lysate. To pass the lab you will have to submit one short report (in .odt, .doc, .docx, .pdf or .rtf format) per group, with answers to the questions, to any of the Teaching Assistants. The deadline is set to one week. Please work in pairs, as long as possible, and follow the instructions below:</p>
+<p>This computer exercise involves searching for matching peptides to MS/MS spectra of shotgun proteomics experiment, as well as the subsequent inference of proteins from these peptides. We will do the search using a freely available search engine called <a href="ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/CURRENT/omssa-linux.tar.gz">OMSSA</a>, on an example dataset from a yeast lysate. To pass the lab you will have to submit one short report (in .odt, .doc, .docx, .pdf or .rtf format) per group, with answers to the questions, to any of the Teaching Assistants. The deadline is set to one week after the lab has taken place. Please work in pairs, as long as possible, and follow the instructions below:</p>
 
 <h3><a name="h.8b0j30iju0nq"></a>The data</h3>
 
@@ -68,7 +68,7 @@ java -jar SearchGUI-2.6.4.jar<br/>
 
 <p>If opening the SearchGUI worked properly, you should now be able to search for matching peptides. But we will first have to specify the parameters of our search.</p>
 
-<p>Under Edit &gt; Search Engines, change the path of OMSSA Location to your unzipped OMSSA directory. Also switch X!Tandem Location to "Disabled". X!Tandem is another search engine which we didn't download here.</p>
+<p>Under Edit &gt; Search Engines, change the path of OMSSA Location to your unzipped OMSSA directory. Also switch X!Tandem Location to "Disabled". X!Tandem is another search engine which we didn't download here. Do the same for all other search engines besides OMSSA.</p>
 
 <p>Under "Input &amp; Output", select the yeast_spectra.mgf file as the "Spectrum File", and an appropriate "Output Folder".</p>
 
@@ -82,7 +82,7 @@ java -jar SearchGUI-2.6.4.jar<br/>
 
 <p>Variable modifications: 'Oxidation of M' and 'acetylation of protein n-term'.</p>
 
-<p>Our shotgun proteomics experiment was carried out on yeast proteins digested with trypsin, choose Trypsin as the proteolytic enzyme (protease), with 1 as Max Missed Cleavages.<b>QUESTION 1</b>: why not 0?.</p>
+<p>Our shotgun proteomics experiment was carried out on yeast proteins digested with trypsin, choose Trypsin as the proteolytic enzyme (protease), with 1 as Max Missed Cleavages. <b>QUESTION 1</b>: why not 0?.</p>
 
 <p>Set the mass tolerance to 0.2 Da (note the unit) in both cases. <b>QUESTION 2</b>: How come we can specify two different mass tolerances?.</p>
 
@@ -92,13 +92,13 @@ java -jar SearchGUI-2.6.4.jar<br/>
 
 <p>Add a suitable Output Folder and then click on "Start the Search!" button. The search will go in a couple of seconds.</p>
 
-<p>Look in your designated output folder, if everything worked properly, it should contain a couple of files including yeast_spectra.omx, mods.xml, usermods.xml. The OMX-file contains the peptides matches, and the other two files the OMSSA modifications and the user modifications file. We will look closer at these files, and try to infer what proteins they represent in the next step.</p>
+<p>Look in your designated output folder, if everything worked properly, it should contain an archive with a couple of files, including yeast_spectra.omx, omssa_mods.xml, omssa_usermods.xml. The OMX-file contains the peptides matches, and the other two files the OMSSA modifications and the user modifications file. Extract the archive to a convenient location and rename the two modification files to mods.xml and usermods.xml, as this is necessary for the next step. We will look closer at these files, and try to infer what proteins they represent in the next step.</p>
 
 <p>5. <b><i>Watch the peptide search results</i></b></p>
 
 <p>The peptide search is now completely finished and three files have been created in your output directory: First, an OMSSA XML-file (.omx) listing all the peptide matches, and second, two files (mods.xml and usermod.xml) with OMSSA's and our own modification settings, respectively.</p>
 
-<p>To look at the results we use the OMSSA-parser. Download omssa-parser-1.5.8.zip from <a href="http://code.google.com/p/omssa-parser/">http://code.google.com/p/omssa-parser/</a> and unzip it in your working directory. (Command:<code>unzip omssa-parser-1.5.8.zip</code>).</p>
+<p>To look at the results we use the OMSSA-parser. Download omssa-parser-1.7.1.zip from <a href="http://compomics.github.io/projects/omssa-parser.html">http://compomics.github.io/projects/omssa-parser.html</a> and unzip it in your working directory. (Command: <code>unzip omssa-parser-1.7.1.zip</code>).</p>
 
 <p>Open the parser from its' extracted directory, using the command <code>java -jar omssa-parser-1.5.8.jar</code></p>
 
@@ -112,9 +112,9 @@ java -jar SearchGUI-2.6.4.jar<br/>
 
 <p>6. <b><i>Protein identification</i></b></p>
 
-<p>After searching for peptides, download the "Latest Stable Binary" of MassSieve from <a href="http://www.ncbi.nlm.nih.gov/staff/slottad/MassSieve/">http://www.ncbi.nlm.nih.gov/staff/slottad/MassSieve/</a>. Unzip in the same manner as before, in your working directory.</p>
+<p>After searching for peptides, download the "Latest Development Binary" of MassSieve from <a href="http://www.ncbi.nlm.nih.gov/staff/slottad/MassSieve/">http://www.ncbi.nlm.nih.gov/staff/slottad/MassSieve/</a>. Unzip to a directory called MassSieveDev (Command: <code>unzip -d MassSieveDev masssieve.zip</code>), in your working directory.</p>
 
-<p>Open MassSieve from the extracted MassSieve1.12 directory with the following command:</p>
+<p>Open MassSieve from the newly created MassSieveDev directory with the following command:</p>
 
 <p><code>java -jar MassSieve.jar</code></p>
 
@@ -129,12 +129,6 @@ java -jar SearchGUI-2.6.4.jar<br/>
 <p><b>QUESTION 5</b>: What seems to be the difference between the proteins identified with different parsimony types?</p>
 
 <p><b>QUESTION 6</b>: Can you find what important information about the protein matches that is missing in this program?</p>
-
-<p>7. </p>
-
-<h3><a name="h.x7h6n5v2kvrl"></a>Answers</h3>
-
-<p>Should be e-mailed to the Teaching Assistants</p>
 
 <h3><a name="h.tp3olob5cn20"></a>Previous errors, and solutions</h3>
 
