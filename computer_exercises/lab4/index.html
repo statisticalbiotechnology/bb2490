@@ -32,7 +32,7 @@
 
 <p>Download the SearchGUI from <a href="http://compomics.github.io/projects/searchgui.html">http://compomics.github.io/projects/searchgui.html</a>.</p>
 
-<p><i>Unzip:</i> Place the archive in your designated working directory and unzip it with the command: <code>tar -xvzf SearchGUI-2.6.4-mac_and_linux.tar.gz</code></p>
+<p><i>Unzip:</i> Place the archive in your designated working directory and unzip it with the command: <code>tar -xvzf SearchGUI-3.1.4-mac_and_linux.tar.gz</code></p>
 
 <p>Download OMSSA from ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/CURRENT/ and extract OMSSA in your working directory.</p>
 
@@ -49,7 +49,7 @@
 <blockquote>
     <code>
         chmod 777 omssa-2.1.9.linux/omssacl<br/>
-        <nobr>chmod 777 SearchGUI-2.6.4/resources/makeblastdb/linux/linux_64bit/makeblastdb</nobr><br/>
+        <nobr>chmod 777 SearchGUI-3.1.4/resources/makeblastdb/linux/linux_64bit/makeblastdb</nobr><br/>
     </code>
 </blockquote>
 
@@ -57,8 +57,8 @@
 
 <blockquote>
     <code>
-cd SearchGUI-2.6.4/<br/>
-java -jar SearchGUI-2.6.4.jar<br/>
+cd SearchGUI-3.1.4/<br/>
+java -jar SearchGUI-3.1.4.jar<br/>
     </code>
 </blockquote>
 
@@ -68,7 +68,7 @@ java -jar SearchGUI-2.6.4.jar<br/>
 
 <p>If opening the SearchGUI worked properly, you should now be able to search for matching peptides. But we will first have to specify the parameters of our search.</p>
 
-<p>Under Edit &gt; Search Engines, change the path of OMSSA Location to your unzipped OMSSA directory. Also switch X!Tandem Location to "Disabled". X!Tandem is another search engine which we didn't download here. Do the same for all other search engines besides OMSSA.</p>
+<p>Under Edit &gt; Software Folders, change the path of OMSSA Location to your unzipped OMSSA directory. Also make sure OMSSA is the only enabled search engine. The other possible search engines, such as X!Tandem, are other search engines which we didn't download here. </p>
 
 <p>Under "Input &amp; Output", select the yeast_spectra.mgf file as the "Spectrum File", and an appropriate "Output Folder".</p>
 
