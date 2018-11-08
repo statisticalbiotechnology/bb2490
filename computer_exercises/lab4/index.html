@@ -32,7 +32,7 @@
 
 <p>Download the SearchGUI from <a href="http://compomics.github.io/projects/searchgui.html">http://compomics.github.io/projects/searchgui.html</a>.</p>
 
-<p><i>Unzip:</i> Place the archive in your designated working directory and unzip it with the command: <code>tar -xvzf SearchGUI-3.1.4-mac_and_linux.tar.gz</code></p>
+<p><i>Unzip:</i> Place the archive in your designated working directory and unzip it with the command: <code>tar -xvzf SearchGUI-3.3.6-mac_and_linux.tar.gz</code></p>
 
 <p>Download OMSSA from ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/CURRENT/ and extract OMSSA in your working directory.</p>
 
@@ -49,7 +49,7 @@
 <blockquote>
     <code>
         chmod 777 omssa-2.1.9.linux/omssacl<br/>
-        <nobr>chmod 777 SearchGUI-3.1.4/resources/makeblastdb/linux/linux_64bit/makeblastdb</nobr><br/>
+        <nobr>chmod 777 SearchGUI-3.3.6/resources/makeblastdb/linux/linux_64bit/makeblastdb</nobr><br/>
     </code>
 </blockquote>
 
@@ -57,8 +57,8 @@
 
 <blockquote>
     <code>
-cd SearchGUI-3.1.4/<br/>
-java -jar SearchGUI-3.1.4.jar<br/>
+cd SearchGUI-3.3.6/<br/>
+java -jar SearchGUI-3.3.6.jar<br/>
     </code>
 </blockquote>
 
@@ -98,9 +98,9 @@ java -jar SearchGUI-3.1.4.jar<br/>
 
 <p>The peptide search is now completely finished and three files have been created in your output directory: First, an OMSSA XML-file (.omx) listing all the peptide matches, and second, two files (mods.xml and usermod.xml) with OMSSA's and our own modification settings, respectively.</p>
 
-<p>To look at the results we use the OMSSA-parser. Download omssa-parser-1.7.1.zip from <a href="http://compomics.github.io/projects/omssa-parser.html">http://compomics.github.io/projects/omssa-parser.html</a> and unzip it in your working directory. (Command: <code>unzip omssa-parser-1.7.1.zip</code>).</p>
+<p>To look at the results we use the OMSSA-parser. Download omssa-parser-1.9.0.zip from <a href="http://compomics.github.io/projects/omssa-parser.html">http://compomics.github.io/projects/omssa-parser.html</a> and unzip it in your working directory. (Command: <code>unzip omssa-parser-1.9.0.zip</code>).</p>
 
-<p>Open the parser from its' extracted directory, using the command <code>java -jar omssa-parser-1.7.1.jar</code></p>
+<p>Open the parser from its' extracted directory, using the command <code>java -jar omssa-parser-1.9.0.jar</code></p>
 
 <p>You will be asked for your peptide search results file and the two modification files, fill in these fields.</p>
 
